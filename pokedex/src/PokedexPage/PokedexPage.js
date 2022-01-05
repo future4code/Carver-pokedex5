@@ -19,7 +19,7 @@ export const PokedexPage = () => {
         <div class="pokemon-flex-container">
           <div class="item-pokemon-flex">
             <h3>Pokedex</h3>
-            <p>Incriveis pokemons</p>
+            <p>Incriveis pokemons.</p>
             <div>
               <button className="botao-remover">Remover</button><Link to="/detalhes" className="botao-detalhes">Ver detalhes</Link>
             </div>
