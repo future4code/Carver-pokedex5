@@ -9,51 +9,32 @@ const HomePage = () => {
   const navigate = useNavigate()
 
   const [pokemon, setPokemon] = useState([])
-  const [newPokemon, setNewPokemon] = useState([])
 
   const getPokemons = () => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=20`)
-    .then((res) => {
-      setPokemon(res.data.results)
-    })
-    .catch((err) => {
-      console.log(err.response.data)
-    })
-  }
- 
-    const getNewPokemons = () => {
-      const newPoke = []
+    const newPoke = []
 
-      pokemon.forEach((poke) => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${poke.name}`)
-        .then((res) => {
-          newPoke.push(res.data)
-          if (newPoke.length === 20) {
-            const orderedList = newPoke.sort((a, b) => {
-              return a.id - b.id;
-            });
-            setNewPokemon(orderedList);
-          }
-        })
-        .catch((err) => {
-          console.log(err.response)
-        })
+    for(let i = 1; i <= 20; i++){
+      axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      .then((res) => {
+        newPoke.push(res.data)
+        if (newPoke.length === 20) {
+          const orderedList = newPoke.sort((a, b) => {
+          return a.id - b.id;
+          });
+          setPokemon(orderedList);
+        } 
       })
-      setNewPokemon(newPoke)
-      console.log(newPoke)
+      .catch((err) => {
+        console.log(err.response.data)
+      })
     }
+  }
   
   useEffect(() => {
     getPokemons()
   }, [])
 
-  useEffect(() => {
-    getNewPokemons()
-  }, [pokemon])
-
-
-  const renderPokeList = newPokemon.map((poke, index) => {
-    console.log(newPokemon)
+  const renderPokeList = pokemon.map((poke, index) => {
       return (
         <DivCard key={index}>
           <Img src={poke.sprites.front_default} alt={poke.name} />
@@ -75,7 +56,8 @@ const HomePage = () => {
       </DivHeader>
       
       <DivPoke>
-        {newPokemon && renderPokeList}
+        {renderPokeList}
+        olá
       </DivPoke>
  
     </DivMain>
