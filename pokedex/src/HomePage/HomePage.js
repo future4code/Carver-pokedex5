@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { DivMain, DivHeader, DivPoke, DivCard, Img } from "./Styled";
-import { goToPokedex } from "../routes/coordinator"
-import { useNavigate } from 'react-router-dom'
+import { goToPokedex } from "../routes/coordinator";
+import { useNavigate } from 'react-router-dom';
 import {GlobalContext} from "../contexts/GlobalContext/GlobalStateContext";
 
 const HomePage = () => {

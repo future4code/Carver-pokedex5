@@ -1,15 +1,20 @@
 import React from "react";
 import './Stillo/Poke.css';
-import { Link } from "react-router-dom";
+import {goToHome} from '../routes/coordinator';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export const PokedexPage = () => {
+
+  const navigate = useNavigate();
 
   return (
     <div>
       <header id="container-header">
         <div id="menu-pokedex">
           <div id="menu-horizontal">
+            <button onClick={() => goToHome(navigate)}>Voltar</button>
             <h1 class="texto-pokedex">Pokedex</h1>
           </div>
         </div>
@@ -21,7 +26,8 @@ export const PokedexPage = () => {
             <h3>Pokedex</h3>
             <p>Incriveis pokemons.</p>
             <div>
-              <button className="botao-remover">Remover</button><Link to="/detalhes" className="botao-detalhes">Ver detalhes</Link>
+              <button className="botao-remover">Remover</button>
+              <button className="botao-detalhes">Ver detalhes</button>
             </div>
           </div>
         </div>
