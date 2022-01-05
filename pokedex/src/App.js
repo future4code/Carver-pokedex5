@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState }from 'react'
 import Router from './routes/Router'
 import { createGlobalStyle } from 'styled-components'
+import {GlobalState} from './contexts/GlobalContext/GloboState'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,11 +28,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+
   return (
-  <div>
-    <GlobalStyle />
-    <Router />
-  </div>
+    <GlobalState>
+      <div>
+        <GlobalStyle />
+        <Router />
+      </div>
+    </GlobalState>
   )
 }
 

@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import React, { useEffect, useContext } from "react";
 import { DivMain, DivHeader, DivPoke, DivCard, Img } from "./Styled";
 import { goToPokedex } from "../routes/coordinator"
 import { useNavigate } from 'react-router-dom'
+import {GlobalContext} from "../contexts/GlobalContext/GlobalStateContext";
 
 const HomePage = () => {
 
   const navigate = useNavigate()
 
-  const [pokemon, setPokemon] = useState([])
-
-  const getPokemons = () => {
-    const newPoke = []
-
-    for(let i = 1; i <= 20; i++){
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
-      .then((res) => {
-        newPoke.push(res.data)
-        if (newPoke.length === 20) {
-          const orderedList = newPoke.sort((a, b) => {
-          return a.id - b.id;
-          });
-          setPokemon(orderedList);
-        } 
-      })
-      .catch((err) => {
-        console.log(err.response.data)
-      })
-    }
-  }
+  const {pokemon, getPokemons} = useContext(GlobalContext)
   
   useEffect(() => {
     getPokemons()
@@ -57,7 +37,6 @@ const HomePage = () => {
       
       <DivPoke>
         {renderPokeList}
-        olá
       </DivPoke>
  
     </DivMain>
