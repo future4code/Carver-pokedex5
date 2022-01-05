@@ -5,6 +5,7 @@ import axios from 'axios'
 export const GlobalState = (props) => {
 
     const [pokemon, setPokemon] = useState([])
+    const [pokedex, setPokedex] = useState([])
 
     const getPokemons = () => {
         const newPoke = []
@@ -26,8 +27,14 @@ export const GlobalState = (props) => {
         }
       }
 
+      const addPokemonToPokedex = (poke, index) => {
+        const addPokedex = [...pokedex, poke]
+        setPokedex(addPokedex)
+        pokemon.splice(index, 1)
+      }
+
     return (
-        <GlobalContext.Provider value={{pokemon, getPokemons}}>
+        <GlobalContext.Provider value={{pokemon, getPokemons, pokedex, setPokedex, addPokemonToPokedex}}>
             {props.children}
         </GlobalContext.Provider>
     )
