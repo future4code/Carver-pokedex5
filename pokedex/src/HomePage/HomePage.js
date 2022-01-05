@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { DivMain, DivHeader, DivPoke, DivCard, Img } from "./Styled";
-import { goToPokedex } from "../routes/coordinator"
+import { goToPokedex, goToDetails } from "../routes/coordinator"
 import { useNavigate } from 'react-router-dom'
 import {GlobalContext} from "../contexts/GlobalContext/GlobalStateContext";
 
@@ -9,21 +9,36 @@ const HomePage = () => {
   const navigate = useNavigate()
 
   const {pokemon, getPokemons} = useContext(GlobalContext)
+  const {pokedex, setPokedex} = useContext(GlobalContext)
+  const {addPokemonToPokedex} = useContext(GlobalContext)
   
   useEffect(() => {
     getPokemons()
   }, [])
 
-  const renderPokeList = pokemon.map((poke, index) => {
+  useEffect(() => {
+    const renderPokeList = pokemon.map((poke, index) => {
       return (
         <DivCard key={index}>
           <Img src={poke.sprites.front_default} alt={poke.name} />
           <h3>{poke.name}</h3>
-          <button>Adicionar</button>
-          <button>Detalhes</button>
+          <button onClick={() => addPokemonToPokedex(poke, index)}>Adicionar</button>
+          <button onClick={() => goToDetails(navigate)}>Detalhes</button>
         </DivCard>
       )
     })
+  }, [pokedex])
+
+  const renderPokeList = pokemon.map((poke, index) => {
+    return (
+      <DivCard key={index}>
+        <Img src={poke.sprites.front_default} alt={poke.name} />
+        <h3>{poke.name}</h3>
+        <button onClick={() => addPokemonToPokedex(poke, index)}>Adicionar</button>
+        <button onClick={() => goToDetails(navigate)}>Detalhes</button>
+      </DivCard>
+    )
+  })
 
   return (
     <DivMain>
