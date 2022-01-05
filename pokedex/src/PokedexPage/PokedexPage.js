@@ -27,7 +27,7 @@ export const PokedexPage = () => {
         </div>
       </main>
       <footer id="container-footer">
-        <p> Bernado Augusto de Souza 324, Prédio Lindoia 157 | (00) 8436 - 67120 |  labex_trips@contato.com</p>
+        <p> Os melhores Pokemons estão aqui.</p>
       </footer>
     </div>
   )
