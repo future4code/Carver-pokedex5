@@ -1,35 +1,58 @@
-import React from "react";
-import './Stillo/Poke.css';
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext, useState } from "react";
+import {goToHome, goToDetails} from '../routes/coordinator';
+import { useNavigate } from 'react-router-dom';
+import {GlobalContext} from "../contexts/GlobalContext/GlobalStateContext";
+import { DivMain, DivHeader, DivPoke, DivCard, Img } from "../HomePage/Styled";
+
+
 
 
 export const PokedexPage = () => {
 
+  const navigate = useNavigate();
+
+  const {pokedex, setPokedex} = useContext(GlobalContext);
+  const {removePokemonToPokedex} = useContext(GlobalContext);
+
+
+  const removerPokemon = (itemToRemove) => {
+    const index = pokedex.findIndex(i => i.id === itemToRemove.id);  
+    console.log(index)
+    const newPokemon = [...pokedex];
+    console.warn(newPokemon)
+
+   
+    setPokedex(newPokemon);
+  };
+
+  const displayPokedex = pokedex.map((pokemons, index) => {
+    return (
+      <DivCard key={index}>
+        <Img src={pokemons.sprites.front_default} alt={pokemons.name} />
+        <h3>{pokemons.name}</h3>
+        <div>
+          <button onClick={() => removePokemonToPokedex(pokemons,index)}>Remover</button>
+          <button onClick={() => goToDetails(navigate)}>Ver detalhes</button>
+        </div>
+      </DivCard>
+    )
+  })
+
+
   return (
-    <div>
-      <header id="container-header">
+    <DivMain>
+      <DivHeader>
         <div id="menu-pokedex">
           <div id="menu-horizontal">
-            <h1 class="texto-pokedex">Pokedex</h1>
+            <button onClick={() => goToHome(navigate)}>Voltar</button>
+            <h1 className="texto-pokedex">Pokedex</h1>
           </div>
         </div>
-      </header>
-      <br/>
-      <main>
-        <div class="pokemon-flex-container">
-          <div class="item-pokemon-flex">
-            <h3>Pokedex</h3>
-            <p>Incriveis pokemons.</p>
-            <div>
-              <button className="botao-remover">Remover</button><Link to="/detalhes" className="botao-detalhes">Ver detalhes</Link>
-            </div>
-          </div>
-        </div>
-      </main>
-      <footer id="container-footer">
-        <p> Os melhores Pokemons estão aqui.</p>
-      </footer>
-    </div>
+      </DivHeader>
+        <DivPoke>
+        {displayPokedex}
+        </DivPoke>
+    </DivMain>
   )
 }
 

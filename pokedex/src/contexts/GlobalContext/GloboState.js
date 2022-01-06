@@ -33,8 +33,14 @@ export const GlobalState = (props) => {
         pokemon.splice(index, 1)
       }
 
+      const removePokemonToPokedex = (poke,index) =>{
+        const removerPokedex = [...pokemon,poke];
+        setPokemon(removerPokedex);
+        pokedex.splice(index,1)
+      }
+
     return (
-        <GlobalContext.Provider value={{pokemon, getPokemons, pokedex, setPokedex, addPokemonToPokedex}}>
+        <GlobalContext.Provider value={{pokemon, getPokemons, pokedex, setPokedex, addPokemonToPokedex,removePokemonToPokedex}}>
             {props.children}
         </GlobalContext.Provider>
     )
