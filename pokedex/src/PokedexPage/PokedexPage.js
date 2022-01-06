@@ -28,7 +28,7 @@ export const PokedexPage = () => {
           <button onClick={() => removePokemonToPokedex(pokemons, index)}>
             Remover
           </button>
-          <button onClick={() => goToDetails(navigate)}>Ver detalhes</button>
+          <button onClick={() => goToDetails(navigate, pokemons.name)}>Ver detalhes</button>
         </div>
       </DivCard>
     );

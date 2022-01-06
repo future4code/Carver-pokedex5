@@ -45,7 +45,7 @@ const HomePage = () => {
         <Img src={poke.sprites.front_default} alt={poke.name} />
         <h3>{poke.name}</h3>
         <button onClick={() => addPokemonToPokedex(poke, index)}>Adicionar</button>
-        <button onClick={() => goToDetails(navigate)}>Detalhes</button>
+        <button onClick={() => goToDetails(navigate, poke.name)}>Detalhes</button>
       </DivCard>
     )
   })
