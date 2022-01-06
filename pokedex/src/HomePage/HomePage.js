@@ -8,13 +8,22 @@ const HomePage = () => {
 
   const navigate = useNavigate()
 
-  const {pokemon, getPokemons} = useContext(GlobalContext)
-  const {pokedex, setPokedex} = useContext(GlobalContext)
+  const {pokemon, getPokemons, setPokemon} = useContext(GlobalContext)
+  const {pokedex} = useContext(GlobalContext)
   const {addPokemonToPokedex} = useContext(GlobalContext)
+  const pokeLocalStorage = localStorage.getItem('pokeList')
+  const newList = JSON.parse(pokeLocalStorage)
+
   
   useEffect(() => {
-    getPokemons()
+    if(!localStorage.getItem('pokeList')){
+      getPokemons()
+    } else {
+      setPokemon(newList)
+      console.log(newList)
+    }
   }, [])
+
 
   useEffect(() => {
     const renderPokeList = pokemon.map((poke, index) => {
@@ -29,7 +38,9 @@ const HomePage = () => {
     })
   }, [pokedex])
 
-  const renderPokeList = pokemon.map((poke, index) => {
+  const renderPokeList = pokemon.sort((a, b) => {
+    return a.id - b.id;
+  }).map((poke, index) => {
     return (
       <DivCard key={index}>
         <Img src={poke.sprites.front_default} alt={poke.name} />

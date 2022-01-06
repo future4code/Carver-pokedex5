@@ -6,7 +6,7 @@ export const GlobalState = (props) => {
 
     const [pokemon, setPokemon] = useState([])
     const [pokedex, setPokedex] = useState([])
-
+    
     const getPokemons = () => {
         const newPoke = []
     
@@ -19,6 +19,7 @@ export const GlobalState = (props) => {
               return a.id - b.id;
               });
               setPokemon(orderedList);
+              // localStorage.setItem('pokeList', JSON.stringify(pokemon))
             } 
           })
           .catch((err) => {
@@ -31,16 +32,19 @@ export const GlobalState = (props) => {
         const addPokedex = [...pokedex, poke]
         setPokedex(addPokedex)
         pokemon.splice(index, 1)
+        localStorage.setItem('pokeList', JSON.stringify(pokemon))
       }
 
       const removePokemonToPokedex = (poke,index) =>{
         const removerPokedex = [...pokemon,poke];
         setPokemon(removerPokedex);
         pokedex.splice(index,1)
+        pokemon.push(poke)
+        localStorage.setItem('pokeList', JSON.stringify(pokemon))
       }
 
     return (
-        <GlobalContext.Provider value={{pokemon, getPokemons, pokedex, setPokedex, addPokemonToPokedex,removePokemonToPokedex}}>
+        <GlobalContext.Provider value={{pokemon, setPokemon, getPokemons, pokedex, setPokedex, addPokemonToPokedex,removePokemonToPokedex}}>
             {props.children}
         </GlobalContext.Provider>
     )
