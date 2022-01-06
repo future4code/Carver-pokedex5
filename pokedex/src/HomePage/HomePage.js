@@ -20,7 +20,6 @@ const HomePage = () => {
       getPokemons()
     } else {
       setPokemon(newList)
-      console.log(newList)
     }
   }, [])
 
