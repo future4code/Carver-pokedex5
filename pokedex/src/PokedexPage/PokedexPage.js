@@ -9,6 +9,16 @@ export const PokedexPage = () => {
 
   const { pokedex, setPokedex } = useContext(GlobalContext);
   const { removePokemonToPokedex } = useContext(GlobalContext);
+  const pokedexLocalStorage = localStorage.getItem('Pokedex')
+  const newList = JSON.parse(pokedexLocalStorage)
+
+
+  useEffect(() => {
+    if(localStorage.getItem('Pokedex')){
+      setPokedex(newList);
+    } 
+  }, [])
+
 
   const removerPokemon = (itemToRemove) => {
     const index = pokedex.findIndex((i) => i.id === itemToRemove.id);

@@ -29,10 +29,12 @@ export const GlobalState = (props) => {
       }
 
       const addPokemonToPokedex = (poke, index) => {
-        const addPokedex = [...pokedex, poke]
-        setPokedex(addPokedex)
-        pokemon.splice(index, 1)
-        localStorage.setItem('pokeList', JSON.stringify(pokemon))
+        const addPokedex = [...pokedex, poke];
+        setPokedex(addPokedex);
+        console.log(addPokedex);
+        pokemon.splice(index, 1);
+        localStorage.setItem('pokeList', JSON.stringify(pokemon));
+        localStorage.setItem('Pokedex',JSON.stringify(addPokedex));
       }
 
       const removePokemonToPokedex = (poke,index) =>{
@@ -41,6 +43,7 @@ export const GlobalState = (props) => {
         pokedex.splice(index,1)
         pokemon.push(poke)
         localStorage.setItem('pokeList', JSON.stringify(pokemon))
+        localStorage.setItem('Pokedex',JSON.stringify(pokedex))
       }
 
     return (
