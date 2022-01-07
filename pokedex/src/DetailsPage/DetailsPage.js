@@ -1,11 +1,9 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext/GlobalStateContext';
-import { Img } from '../HomePage/Styled';
 import { goToHome, goToPokedex } from '../routes/coordinator';
 import {
-  CardDiv,
   HeaderDiv,
   ImageCard,
   ImageContainer,
@@ -26,7 +24,6 @@ function DetailsPage() {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
       .then((res) => {
-        console.log(res.data);
         pokeData.push(res.data);
         setPokemon(pokeData);
       })
