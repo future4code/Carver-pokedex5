@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { goToHome, goToDetails } from '../routes/coordinator';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext/GlobalStateContext';
@@ -9,16 +9,14 @@ export const PokedexPage = () => {
 
   const { pokedex, setPokedex } = useContext(GlobalContext);
   const { removePokemonToPokedex } = useContext(GlobalContext);
-  const pokedexLocalStorage = localStorage.getItem('Pokedex')
-  const newList = JSON.parse(pokedexLocalStorage)
-
+  const pokedexLocalStorage = localStorage.getItem('Pokedex');
+  const newList = JSON.parse(pokedexLocalStorage);
 
   useEffect(() => {
-    if(localStorage.getItem('Pokedex')){
+    if (localStorage.getItem('Pokedex')) {
       setPokedex(newList);
-    } 
-  }, [])
-
+    }
+  }, []);
 
   const removerPokemon = (itemToRemove) => {
     const index = pokedex.findIndex((i) => i.id === itemToRemove.id);
@@ -38,7 +36,9 @@ export const PokedexPage = () => {
           <button onClick={() => removePokemonToPokedex(pokemons, index)}>
             Remover
           </button>
-          <button onClick={() => goToDetails(navigate, pokemons.name)}>Ver detalhes</button>
+          <button onClick={() => goToDetails(navigate, pokemons.name)}>
+            Ver detalhes
+          </button>
         </div>
       </DivCard>
     );
